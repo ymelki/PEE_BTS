@@ -31,7 +31,7 @@
             <?php
             $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
             if ($estConnecte) {
-                ?>
+                ?>mA NAVBAR DE COMPTA
             <div class="header">
                 <div class="row vertical-align">
                     <div class="col-md-4">
@@ -67,7 +67,7 @@
                                     <span class="glyphicon glyphicon-log-out"></span>
                                     Déconnexion
                                 </a>
-                            </li>
+                            </li> 
                         </ul>
                     </div>
                 </div>

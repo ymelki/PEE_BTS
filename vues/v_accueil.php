@@ -16,8 +16,8 @@
 ?>
 <div id="accueil">
     <h2>
-        Gestion des frais<small> - Visiteur : 
-            <?php 
+        Gestion des frais<small> - <?= $_SESSION['nom2']?> : 
+            <?php var_dump($_SESSION);
             echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']
             ?></small>
     </h2>

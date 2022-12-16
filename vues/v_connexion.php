@@ -13,6 +13,7 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
+include 'vues/v_entete_deconnecte.php';
 ?>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">

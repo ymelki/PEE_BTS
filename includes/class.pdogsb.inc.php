@@ -40,8 +40,8 @@ class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsb_frais';
-    private static $user = 'userGsb';
-    private static $mdp = 'secret';
+    private static $user = 'root';
+    private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
 
@@ -94,8 +94,8 @@ class PdoGsb
     {
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT visiteur.id AS id, visiteur.nom AS nom, '
-            . 'visiteur.prenom AS prenom '
-            . 'FROM visiteur '
+            . 'visiteur.prenom AS prenom , visiteur.type as id2,  type.nom as nom2 '
+            . 'FROM visiteur inner join type on visiteur.type = type.id '
             . 'WHERE visiteur.login = :unLogin AND visiteur.mdp = :unMdp'
         );
         $requetePrepare->bindParam(':unLogin', $login, PDO::PARAM_STR);
