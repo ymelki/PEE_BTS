@@ -31,6 +31,7 @@ if ($estConnecte) {
 
 // $uc=$_GET['uc']
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
+// $_GET
 echo "test" . $uc;
 
 // CAS 1 : Je pars dans la page connexion dans un cas :

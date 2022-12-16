@@ -13,12 +13,30 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
-
+// on a besoin de l'id du visiter pour générer une fiche de frais
+// on la stock dans la variable idVisiteur issue de la variable
+// du tableau session créé lors de l'authentification
 $idVisiteur = $_SESSION['idVisiteur'];
+
+// la fonction date('d/m/Y') => renvoie la date du jour : 12/12/2022
+
+// mois <= 202212
+// mois <= 202202
 $mois = getMois(date('d/m/Y'));
+
+// fonction substr => qui va prendre en parametre "202212"
+// elle va extraire une partie du 0 au 4 : Les 2 parametre d'apres.
+// $numAnnee <= 2022
+// $numMois <= 12
 $numAnnee = substr($mois, 0, 4);
 $numMois = substr($mois, 4, 2);
+
+// $action <= lit dans l'URL le parametre "action" et le stock
+// dans une variable $action
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+
+
+
 switch ($action) {
 case 'saisirFrais':
     if ($pdo->estPremierFraisMois($idVisiteur, $mois)) {
@@ -58,6 +76,12 @@ case 'supprimerFrais':
     break;
 }
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+
+// cette fonction va renvoyer un tableau
+// contenant les elements remboursable pour le visiteur en question
+// qui est inséré dans la table ligne forfait lors de l'affichage 
+// de la page plus haut
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
 require 'vues/v_listeFraisForfait.php';
+
 require 'vues/v_listeFraisHorsForfait.php';

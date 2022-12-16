@@ -24,7 +24,7 @@
               action="index.php?uc=gererFrais&action=validerMajFraisForfait" 
               role="form">
             <fieldset>       
-                <?php
+                <?php 
                 foreach ($lesFraisForfait as $unFrais) {
                     $idFrais = $unFrais['idfrais'];
                     $libelle = htmlspecialchars($unFrais['libelle']);

@@ -91,6 +91,16 @@ function dateAnglaisVersFrancais($maDate)
  */
 function getMois($date)
 {
+    // si j'ai une date 16/12/2022
+    // $jour<= 16 // unset retire cette variable
+    // $mois<= 12
+    // $annee<= 2022
+    // $date<= 16/12/2022
+
+    // si le mois fais un seul caracere (1 jusqu'a 9 (sept)) => on met un 0
+
+    // si on avait 22022 => 022022
+    // il retourne 202212
     @list($jour, $mois, $annee) = explode('/', $date);
     unset($jour);
     if (strlen($mois) == 1) {
