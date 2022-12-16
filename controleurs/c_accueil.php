@@ -16,8 +16,7 @@
 
 if ($estConnecte) {
     // 1 CAS JE SUIS UN VISITEUR
-    include 'vues/v_entete_connecte.php';
-    if ($_SESSION['id2']==1) {
+     if ($_SESSION['id2']==1) {
         include 'vues/v_accueil.php';
     }
     // 2 CAS JE SUIS UN COMPTABLE

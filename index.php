@@ -24,7 +24,10 @@ var_dump($_REQUEST);
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
 require 'vues/v_entete_commun.php';
-
+if ($estConnecte) {
+    // Entete specifique pour les visiteurs ou comptable
+    include 'vues/v_entete_connecte.php';
+}
 
 // $uc=$_GET['uc']
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
