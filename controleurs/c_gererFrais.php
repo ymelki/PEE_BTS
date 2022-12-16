@@ -45,6 +45,9 @@ case 'saisirFrais':
     break;
 case 'validerMajFraisForfait':
     $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_SANITIZE_STRING);
+    echo "je test";
+    var_dump($lesFrais);
+    echo "je test2";
     if (lesQteFraisValides($lesFrais)) {
         $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
     } else {
@@ -53,9 +56,12 @@ case 'validerMajFraisForfait':
     }
     break;
 case 'validerCreationFrais':
+    //$dateFrais<= Recuperer du formulaire 
+    // en POST grace à la l'attribut de l'INPUT pareil pour les 3 
     $dateFrais = filter_input(INPUT_POST, 'dateFrais', FILTER_SANITIZE_STRING);
     $libelle = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
     $montant = filter_input(INPUT_POST, 'montant', FILTER_VALIDATE_FLOAT);
+
     var_dump($montant);
     valideInfosFrais($dateFrais, $libelle, $montant);
     if (nbErreurs() != 0) {
@@ -77,9 +83,16 @@ case 'supprimerFrais':
 }
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 
+// 1. au click sur la page renseigner la fiche de frais
+// il y a une insertion dans la table lignefraisforfait
+// contenant l'IDvisiteur et le mois en cours avec une quantité à 0
+// 2. chez nous on voit que on recupere les données inséré
+// par défaut à 0 et on construit le formulaire 
+// grace à fraisforfait pour construire le formulaire
+
 // cette fonction va renvoyer un tableau
 // contenant les elements remboursable pour le visiteur en question
-// qui est inséré dans la table ligne forfait lors de l'affichage 
+// qui est inséré dans la table lignefraisforfait lors de l'affichage 
 // de la page plus haut
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
 require 'vues/v_listeFraisForfait.php';
