@@ -8,5 +8,16 @@ switch ($action) {
         include 'vues/v_selectionnerFiche.php';
         break;
 
+        
+    case 'detail_fiche':
+        $levisiteur=filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_STRING);
+       
+        $lesFraisForfait = $pdo->getLesFraisForfait($levisiteur, "202212");
+        
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($levisiteur, "202212");
+        
+        include 'vues/v_detail_fiche.php';
+        break;
+
     
 }

@@ -33,7 +33,7 @@ $fiches=$pdo->getFichesfrais();
                 <tr>
                     <td> <?php echo $unefiche['idvisiteur'] ?></td>
                     <td> <?php echo $unefiche['mois'] ?></td>
-                    <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>"> 
+                    <td><a href="index.php?uc=paiementFicheFrais&action=detail_fiche&idFrais=<?php echo $unefiche['idvisiteur'] ?>"> 
                            Détail</a></td>
                 </tr>
                 <?php

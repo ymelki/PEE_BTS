@@ -35,15 +35,12 @@
                     $idFrais = $unFraisForfait['idfrais'];
 
                     $quantite = $unFraisForfait['quantite']; ?>
-                    <td>
-                        <input type="text" id="idFrais" value=<?= $quantite ?> name=<?= $idFrais ?> size="10" maxlength="5" class="form-control">
-                    </td> <?php
+                   <?php
                         }
                             ?>
             </tr>
         </table>
 
-        <input id="ok" type="submit" value="Modifier" class="btn btn-success" role="button">
 </form>
 </div>
 
@@ -58,7 +55,6 @@
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
                 <th class='montant'>Montant</th>
-                <th>Supprimer</th>
             </tr>
             <?php
             foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
@@ -69,18 +65,10 @@
                     <td><?php echo $date ?></td>
                     <td><?php echo $libelle ?></td>
                     <td><?php echo $montant ?></td>
-                    <td>
-                        <input name=<?php echo $libelle ?> class="form-check-input" type="checkbox" value=<?php echo $libelle ?> id="flexCheckDefault">
-                    </td>
                 </tr>
             <?php
             }
             ?>
         </table>
-        <input id="ok" type="submit" value="Supprimer" class="btn btn-success" role="button">
-</form>
+
 </div>
-</form>
-<a href="index.php?uc=ValiderFrais&action=valider_fiche&id_visiteur=&mois=">
-<button type="button" class="btn btn-primary">Valider la fiche</button>
-</a>
