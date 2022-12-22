@@ -47,7 +47,7 @@
 </form>
 </div>
 
-<form method="POST" action="index.php?uc=ValiderFrais&action=modifier_hors_forfait">
+<form method="POST" action="index.php?uc=ValiderFrais&action=supprimer_hors_forfait">
 
 
     <div class="panel panel-info">
@@ -61,19 +61,25 @@
                 <th>Supprimer</th>
             </tr>
             <?php
+            $i=1;
             foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+                
                 $date = $unFraisHorsForfait['date'];
                 $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
-                $montant = $unFraisHorsForfait['montant']; ?>
+                $montant = $unFraisHorsForfait['montant']; 
+                $supprimer=$unFraisHorsForfait['id'];
+               
+                ?>
                 <tr>
                     <td><?php echo $date ?></td>
                     <td><?php echo $libelle ?></td>
                     <td><?php echo $montant ?></td>
                     <td>
-                        <input name=<?php echo $libelle ?> class="form-check-input" type="checkbox" value=<?php echo $libelle ?> id="flexCheckDefault">
+                        <input name=<?php echo $i; ?> class="form-check-input" type="checkbox" value=<?php echo $supprimer ?> id="flexCheckDefault">
                     </td>
                 </tr>
             <?php
+            $i++;
             }
             ?>
         </table>
@@ -81,6 +87,6 @@
 </form>
 </div>
 </form>
-<a href="index.php?uc=ValiderFrais&action=valider_fiche&id_visiteur=&mois=">
+<a href="index.php?uc=ValiderFrais&action=modifier_statut_en_valider&id_visiteur=<?=$levisiteur?>&mois=">
 <button type="button" class="btn btn-primary">Valider la fiche</button>
 </a>

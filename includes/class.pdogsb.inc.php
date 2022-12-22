@@ -259,6 +259,16 @@ class PdoGsb
         }
     }
 
+public function majFraisHorsForfait(){
+            $requetePrepare = PdoGSB::$monPdo->prepare(
+                "UPDATE lignefraishorsforfait 
+                SET 
+                libelle = 'Reffuse : N IMPORTE'"
+            );
+            $requetePrepare->execute();
+
+}
+
     /**
      * Met à jour le nombre de justificatifs de la table ficheFrais
      * pour le mois et le visiteur concerné

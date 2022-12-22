@@ -26,11 +26,23 @@ switch ($action) {
       break;
 
       case 'modifier_forfait':
+
          var_dump($_POST); 
+         $pdo->majFraisHorsForfait();
+         echo $_POST['4'];
          break;
 
-    case 'modifier_hors_forfait':
+    case 'supprimer_hors_forfait':
         var_dump($_POST); 
+        break;
+    
+    case 'modifier_statut_en_valider':
+         $levisiteur=filter_input(INPUT_GET, 'id_visiteur', FILTER_SANITIZE_STRING);
+
+        //id_visiteur
+        $pdo->majEtatFicheFrais($levisiteur, "202212" , "VA" ) ;// changer le status
+        include 'vues/v_statut_valider.php';
+
         break;
 
     }
