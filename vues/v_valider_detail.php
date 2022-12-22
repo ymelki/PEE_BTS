@@ -47,7 +47,7 @@
 </form>
 </div>
 
-<form method="POST" action="index.php?uc=ValiderFrais&action=supprimer_hors_forfait">
+<form method="POST" action="index.php?uc=ValiderFrais&action=supprimer_hors_forfait&visiteur=<?=$levisiteur ?>">
 
 
     <div class="panel panel-info">
@@ -75,7 +75,7 @@
                     <td><?php echo $libelle ?></td>
                     <td><?php echo $montant ?></td>
                     <td>
-                        <input name=<?php echo $i; ?> class="form-check-input" type="checkbox" value=<?php echo $supprimer ?> id="flexCheckDefault">
+                        <input name=<?php echo "id".$i; ?> class="form-check-input" type="checkbox" value=<?php echo $supprimer ?> id="flexCheckDefault">
                     </td>
                 </tr>
             <?php

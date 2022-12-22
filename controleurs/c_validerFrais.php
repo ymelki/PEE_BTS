@@ -27,13 +27,32 @@ switch ($action) {
 
       case 'modifier_forfait':
 
-         var_dump($_POST); 
-         $pdo->majFraisHorsForfait();
+ 
+        // $pdo->majFraisHorsForfait();
          echo $_POST['4'];
          break;
 
     case 'supprimer_hors_forfait':
-        var_dump($_POST); 
+        //var_dump($_POST); 
+        $levisiteur=filter_input(INPUT_GET, 'visiteur', FILTER_SANITIZE_STRING);
+
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($levisiteur, "202212");
+        $nb=count($lesFraisHorsForfait);
+        echo "<hr>".$nb."<hr>";
+        for ($i=1; $i<=$nb; $i++){
+           if (isset($_POST['id'.$i])){
+               echo "test";
+               $libelle=$pdo->getLibelle($_POST['id'.$i]);
+               $new_libelle="REFUSE : ".$libelle;
+               $ids=$_POST['id'.$i];
+               $pdo->majFraisHorsForfait($new_libelle,$ids);
+               
+                                                                                                
+               echo "<hr>".$new_libelle."<hr>";
+               echo "<hr>".$ids."<hr>";
+
+           }
+        }
         break;
     
     case 'modifier_statut_en_valider':

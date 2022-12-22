@@ -259,11 +259,23 @@ class PdoGsb
         }
     }
 
-public function majFraisHorsForfait(){
+public function getLibelle($id){
+    $requetePrepare = PdoGsb::$monPdo->prepare(
+        'SELECT libelle '
+        . 'FROM lignefraishorsforfait where id=:id'
+    );
+    $requetePrepare->bindParam(':id', $id, PDO::PARAM_STR);
+    $requetePrepare->execute();
+    $libelle= $requetePrepare->fetch();
+    return $libelle["libelle"];
+}
+
+public function majFraisHorsForfait($libelle, $id){
             $requetePrepare = PdoGSB::$monPdo->prepare(
                 "UPDATE lignefraishorsforfait 
                 SET 
-                libelle = 'Reffuse : N IMPORTE'"
+                libelle ='$libelle'
+                where id=$id"
             );
             $requetePrepare->execute();
 
