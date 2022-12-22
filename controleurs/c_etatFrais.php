@@ -19,15 +19,20 @@ $idVisiteur = $_SESSION['idVisiteur'];
 switch ($action) {
 case 'selectionnerMois':
     $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+var_dump($lesMois);
+ 
     // Afin de sélectionner par défaut le dernier mois dans la zone de liste
     // on demande toutes les clés, et on prend la première,
     // les mois étant triés décroissants
     $lesCles = array_keys($lesMois);
+    var_dump($lesCles);
     $moisASelectionner = $lesCles[0];
-    include 'vues/v_listeMois.php';
+    echo $lesCles[0]; // recuperer la clé mois
+    include 'vues/v_listeMois.php'; 
     break;
 case 'voirEtatFrais':
     $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
+    echo $leMois;
     $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
     $moisASelectionner = $leMois;
     include 'vues/v_listeMois.php';
@@ -42,3 +47,5 @@ case 'voirEtatFrais':
     $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
     include 'vues/v_etatFrais.php';
 }
+
+

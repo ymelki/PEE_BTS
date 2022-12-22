@@ -60,6 +60,14 @@ switch ($uc) {
     case 'deconnexion':
         include 'controleurs/c_deconnexion.php';
         break;
+        case 'ValiderFrais': 
+            include 'controleurs/c_validerFrais.php';
+            break;
+        //ValiderFrais
+    case 'paiementFicheFrais': 
+            include 'controleurs/c_paiementFicheFrais.php';
+            break;
+        //ValiderFrais
     case 'test':
         echo "test";
         include 'controleurs/c_test.php';

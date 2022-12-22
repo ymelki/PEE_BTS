@@ -44,10 +44,13 @@ case 'saisirFrais':
     }
     break;
 case 'validerMajFraisForfait':
+    echo "<hr>";
+    var_dump( $_POST["lesFrais"]);
+    echo "<hr>";
+    var_dump($_POST); echo "<hr>"; 
+
     $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_SANITIZE_STRING);
-    echo "je test";
-    var_dump($lesFrais);
-    echo "je test2";
+    $lesFrais = $_REQUEST['lesFrais'];
     if (lesQteFraisValides($lesFrais)) {
         $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
     } else {

@@ -104,6 +104,29 @@ class PdoGsb
         return $requetePrepare->fetch();
     }
 
+    public function getFichesfrais(){
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'SELECT * from fichefrais
+            where idetat<>"CR"'  
+        ); 
+        $requetePrepare->execute();
+        return $requetePrepare->fetchAll();
+    }
+
+    public function getVisiteur(){
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'SELECT visiteur.id AS id, visiteur.nom AS nom, '
+            . 'visiteur.prenom AS prenom , visiteur.type as id2   '
+            . 'FROM visiteur  INNER JOIN fichefrais
+              ON visiteur.id=fichefrais.idvisiteur
+
+            where visiteur.type = 1'  
+        ); 
+        $requetePrepare->execute();
+        $visiteur=$requetePrepare->fetchAll();
+        return $visiteur;
+    }
+
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais
      * hors forfait concernées par les deux arguments.
@@ -128,6 +151,7 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
         $lesLignes = $requetePrepare->fetchAll();
+ 
         for ($i = 0; $i < count($lesLignes); $i++) {
             $date = $lesLignes[$i]['date'];
             // transformation de la date :   
@@ -422,6 +446,7 @@ class PdoGsb
         );
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->execute();
+        // $lesLignes = $requetePrepare->fetchAll();
         $lesMois = array();
         while ($laLigne = $requetePrepare->fetch()) {
             $mois = $laLigne['mois'];

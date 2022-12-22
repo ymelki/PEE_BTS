@@ -35,9 +35,15 @@
                             } 
                             if ($_SESSION['id2']==2) { ?>
                                 <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
-                                    <a href="index.php?uc=etatFrais&action=selectionnerMois">
+                                    <a href="index.php?uc=ValiderFrais&action=selectionnerMois_User">
                                         <span class="glyphicon glyphicon-list-alt"></span>
-                                        Menu compta
+                                        Valider les frais
+                                    </a>
+                                 </li>
+                                 <li <?php if ($uc == 'paiementFicheFrais') { ?>class="active"<?php } ?>>
+                                    <a href="index.php?uc=paiementFicheFrais&action=selectionnerFiche">
+                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                        Paiement Fiche Frais
                                     </a>
                                  </li>
                             <?php }

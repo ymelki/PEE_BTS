@@ -25,6 +25,7 @@
             <div class="form-group">
                 <label for="lstMois" accesskey="n">Mois : </label>
                 <select id="lstMois" name="lstMois" class="form-control">
+                    <!-- bonjour je commente du HTML ! -->
                     <?php
                     foreach ($lesMois as $unMois) {
                         $mois = $unMois['mois'];
