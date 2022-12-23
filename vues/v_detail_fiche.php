@@ -71,4 +71,10 @@
             ?>
         </table>
 
+     <?php 
+
+     ?>
+<a href="/index.php?uc=paiementFicheFrais&action=modifier_statut&idFrais=<? echo $_GET['idFrais']  ?>">
+<button type="button" class="btn btn-success">Mettre au statut paiement</button>
+</a>
 </div>
