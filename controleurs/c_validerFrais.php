@@ -26,10 +26,14 @@ switch ($action) {
       break;
 
       case 'modifier_forfait':
-
- 
+        var_dump($_POST);
+        $pdo->majFraisForfait( 
+            "a131" , 
+            "202212",
+            $_POST
+        );
         // $pdo->majFraisHorsForfait();
-         echo $_POST['4'];
+          
          break;
 
     case 'supprimer_hors_forfait':
@@ -37,6 +41,8 @@ switch ($action) {
         $levisiteur=filter_input(INPUT_GET, 'visiteur', FILTER_SANITIZE_STRING);
 
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($levisiteur, "202212");
+        
+        // compte le nombre de ligne hors forfait pour l'utilisateur
         $nb=count($lesFraisHorsForfait);
         echo "<hr>".$nb."<hr>";
         for ($i=1; $i<=$nb; $i++){
@@ -55,7 +61,7 @@ switch ($action) {
         }
         break;
     
-    case 'modifier_statut_en_valider':
+    case 'modifier_statut_en_v  alider':
          $levisiteur=filter_input(INPUT_GET, 'id_visiteur', FILTER_SANITIZE_STRING);
 
         //id_visiteur

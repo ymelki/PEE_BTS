@@ -36,7 +36,8 @@
 
                     $quantite = $unFraisForfait['quantite']; ?>
                     <td>
-                        <input type="text" id="idFrais" value=<?= $quantite ?> name=<?= $idFrais ?> size="10" maxlength="5" class="form-control">
+                        <input type="text" 
+                        name="<?php echo $idFrais?>" id="idFrais" value=<?= $quantite ?> name=<?= $idFrais ?> size="10" maxlength="5" class="form-control">
                     </td> <?php
                         }
                             ?>

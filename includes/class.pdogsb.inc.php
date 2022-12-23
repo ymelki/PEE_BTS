@@ -242,8 +242,9 @@ class PdoGsb
     public function majFraisForfait($idVisiteur, $mois, $lesFrais)
     {
         $lesCles = array_keys($lesFrais);
+        var_dump($lesCles);
         foreach ($lesCles as $unIdFrais) {
-            $qte = $lesFrais[$unIdFrais];
+            $qte = $lesFrais[$unIdFrais]; // $_POST['ETP']
             $requetePrepare = PdoGSB::$monPdo->prepare(
                 'UPDATE lignefraisforfait '
                 . 'SET lignefraisforfait.quantite = :uneQte '
