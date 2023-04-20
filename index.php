@@ -42,6 +42,8 @@ if ($uc && !$estConnecte) {
 
     // CAS 2 : Je SUIS CONNECTE mais UC est vide
 } elseif (empty($uc)) {
+
+    // appel d
     $uc = 'accueil';
 }
 switch ($uc) {

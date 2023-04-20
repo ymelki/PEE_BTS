@@ -49,7 +49,7 @@ Pour le mois : <?=$_SESSION['mois'] ?>
 </form>
 </div>
 
-<form method="POST" action="index.php?uc=ValiderFrais&action=supprimer_hors_forfait&visiteur=<?=$levisiteur ?>">
+<form method="POST" action="index.php?uc=ValiderFrais&action=supprimer_hors_forfait">
 
 
     <div class="panel panel-info">
@@ -86,8 +86,8 @@ Pour le mois : <?=$_SESSION['mois'] ?>
             ?>
         </table>
         <input id="ok" type="submit" value="Supprimer" class="btn btn-success" role="button">
-        <input id="ok2" type="submit" value="Reporter" class="btn btn-success" role="button">
-    </form>
+        <input id="ok" type="submit" formaction="index.php?uc=ValiderFrais&action=reporter" value="reporter" class="btn btn-success" role="button">
+     </form>
 
 </div>
 </form>

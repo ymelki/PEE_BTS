@@ -73,14 +73,87 @@ switch ($action) {
           
          break;
 
-    case 'supprimer_hors_forfait':
-        
+
 
  
-        // a voir comment gerer le mois et le visiteur
+    case 'reporter':
+        //var_dump($_POST); 
+        $levisiteur=$_SESSION['user'];
+        $mois=$_SESSION['mois'];
 
-        echo "test";
-        // var_dump($pdo->getDateHorsforfait(       ));
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($levisiteur, $mois);
+        
+        // compte le nombre de ligne hors forfait pour l'utilisateur
+        $nb=count($lesFraisHorsForfait);
+        echo "<hr>".$nb."<hr>";
+        for ($i=1; $i<=$nb; $i++){
+            // cas genéral ou l'on souhaite refusé un remboursement
+           if (isset($_POST['id'.$i])){ 
+
+                // verifier si on à une date correcte < au 10 du mois en cours 
+                // la date du jour a verifier
+                $id=$_POST['id'.$i];
+                $date_jour_initial=$pdo->getDateHorsforfait($id);
+                $date_jour = new DateTimeImmutable($date_jour_initial);
+
+                // la date du mois de référence au 10 du mois au max
+                $annee_max=substr($_SESSION['mois'],0,4);
+                $mois_max=substr($_SESSION['mois'],4,2);
+                $jour_max=10;
+                $date_max = new DateTimeImmutable($annee_max."-".$mois_max."-".$jour_max);
+                // on verifie le nombre jour la date à verifier et le 10 du mois en cours
+                $interval = $date_max->diff($date_jour);
+                echo $interval->format('%R%a days INFOS');
+                // si on est >=  0 alors on est dans le systeme de report
+
+                // 1 Modifier le mois pour le mois dans hors forfait 
+                // on passe de 202304 à 202305
+            
+                if (   $interval > 0  ) {
+        
+                
+                 $dates = new DateTime($annee_max."-".$mois_max."-".$jour_max);
+                 $dates->modify('+1 month');
+                
+                  $date_format= $dates->format('Ym');
+                
+
+                // avant la modification car il y a une contrainte d'intégrité
+                // 2 creer si elle n existe pas nouvelle ligne fiche forfait
+                // 3 nouvelle ligne frais forfait
+                 $pdo->creeNouvellesLignesFrais($_SESSION['user'], $date_format);
+
+                // 1 Modification de la date
+                  $pdo->setMoisencoursFraisHF($date_format,10);
+                }
+
+
+
+
+
+         
+        
+
+
+
+           }
+        }
+
+        
+        $lesFraisForfait = $pdo->getLesFraisForfait($levisiteur, "$mois");
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($levisiteur, "$mois");
+
+    //  include 'vues/v_valider_frais.php';
+        include 'vues/v_valider_detail.php';
+      
+
+
+
+
+
+        break;
+
+    case 'supprimer_hors_forfait': 
 
         //var_dump($_POST); 
         $levisiteur=$_SESSION['user'];
@@ -134,8 +207,9 @@ switch ($action) {
         include 'vues/v_valider_detail.php';
         break;
     
-    case 'modifier_statut_en_v alider':
-         $levisiteur=filter_input(INPUT_GET, 'id_visiteur', FILTER_SANITIZE_STRING);
+    case 'modifier_statut_en_valider':
+         $mois=$_SESSION['mois'];
+         $levisiteur=$_SESSION['user'];
 
         //id_visiteur
         $pdo->majEtatFicheFrais($levisiteur, $mois , "VA" ) ;// changer le status
