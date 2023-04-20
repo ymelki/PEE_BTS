@@ -82,6 +82,17 @@ class PdoGsb
         return PdoGsb::$monPdoGsb;
     }
 
+
+
+    public function getDateHorsforfait($id){      
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'SELECT date FROM lignefraishorsforfait WHERE id = :id'
+        );
+        $requetePrepare->bindParam(':id', $id, PDO::PARAM_INT);
+        $requetePrepare->execute();
+        $resultat = $requetePrepare->fetch();
+        return $resultat['date'];
+    }
     /**
      * Retourne les informations d'un visiteur
      *
@@ -115,7 +126,7 @@ class PdoGsb
 
     public function getVisiteur(){
         $requetePrepare = PdoGsb::$monPdo->prepare(
-            'SELECT visiteur.id AS id, visiteur.nom AS nom, '
+            'SELECT distinct visiteur.id AS id, visiteur.nom AS nom, '
             . 'visiteur.prenom AS prenom , visiteur.type as id2   '
             . 'FROM visiteur  INNER JOIN fichefrais
               ON visiteur.id=fichefrais.idvisiteur
@@ -536,5 +547,54 @@ public function majFraisHorsForfait($libelle, $id){
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
+    }
+
+
+
+    
+	public function getnbfiche(){
+		$req="SELECT count(*) as nb from fichefrais";
+		$res= PdoGsb::$monPdo->query($req);
+		$nb = $res->fetch();
+		return $nb;
+	}
+
+	public function getnbvisiteur(){
+		$req="SELECT count(*) as nb from visiteur";
+		$res= PdoGsb::$monPdo->query($req);
+		$nb = $res->fetch();
+		return $nb;
+	}
+	
+	public function getnbfichebyvisiteur(){
+		$req="SELECT idvisiteur, count(*) as nb  from fichefrais group by idvisiteur";
+		$res= PdoGsb::$monPdo->query($req);
+		$nb = $res->fetch();
+		return $nb;
+	}
+	
+
+    public function getLesMoisVisiteur()
+    {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+            'SELECT distinct fichefrais.mois AS mois FROM fichefrais '
+                . 'ORDER BY mois desc'
+        );
+        $requetePrepare->execute();
+        $moisVisiteur = $requetePrepare->fetchAll(); //['202212','202301','202302']
+        $moisFormates = array();
+
+        //print_r pour tableau
+        //echo(pre)indente bien le tableau
+
+        foreach ($moisVisiteur as $mois) {
+
+            $anneeFormat = substr($mois['mois'], 0, 4);
+            $moisFormat = substr($mois['mois'], 4, 2);
+            $joursFormat = substr($mois['mois'], 6, 2);
+            $moisFormates[$mois['mois']] = array('jours' => $joursFormat, 'mois' => $moisFormat, 'annee' => $anneeFormat);
+        }
+
+        return $moisFormates; // ['202212'=>[annee=>2022, mois=>12], '202301' => [annee=>2023, mois=>01] ... ]
     }
 }

@@ -49,8 +49,20 @@ case 'validerMajFraisForfait':
     echo "<hr>";
     var_dump($_POST); echo "<hr>"; 
 
+    // on recuperer les données en POST du formulaire
     $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_SANITIZE_STRING);
+    
+    
     $lesFrais = $_REQUEST['lesFrais'];
+    $lesFrais = $_POST['lesFrais'];
+
+    echo "test0";
+    var_dump($_POST["lesFrais"]);
+    echo "test--------FIN0";
+
+    echo "test";
+    var_dump($lesFrais);
+    echo "test--------FIN";
     if (lesQteFraisValides($lesFrais)) {
         $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
     } else {
@@ -98,6 +110,8 @@ $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 // qui est inséré dans la table lignefraisforfait lors de l'affichage 
 // de la page plus haut
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+var_dump($lesFraisForfait);
+echo $mois;
 require 'vues/v_listeFraisForfait.php';
 
 require 'vues/v_listeFraisHorsForfait.php';

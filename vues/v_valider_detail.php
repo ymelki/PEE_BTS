@@ -2,7 +2,8 @@
 
 
 ?>
-
+Information concernant le visiteur : <?=$_SESSION['user'] ?>
+Pour le mois : <?=$_SESSION['mois'] ?>
 <form method="post" action="index.php?uc=ValiderFrais&action=modifier_forfait">
 
     <div class="panel panel-info">
@@ -85,7 +86,9 @@
             ?>
         </table>
         <input id="ok" type="submit" value="Supprimer" class="btn btn-success" role="button">
-</form>
+        <input id="ok2" type="submit" value="Reporter" class="btn btn-success" role="button">
+    </form>
+
 </div>
 </form>
 <a href="index.php?uc=ValiderFrais&action=modifier_statut_en_valider&id_visiteur=<?=$levisiteur?>&mois=">

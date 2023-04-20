@@ -45,6 +45,9 @@ if ($uc && !$estConnecte) {
     $uc = 'accueil';
 }
 switch ($uc) {
+    case 'stat':
+        include 'controleurs/c_stat.php';
+        break;
     case 'connexion':
         include 'controleurs/c_connexion.php';
         break;

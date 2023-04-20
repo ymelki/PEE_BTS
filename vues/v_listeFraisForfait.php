@@ -25,7 +25,7 @@
               role="form">
             <fieldset>       
                 <?php 
-                foreach ($lesFraisForfait as $unFrais) {
+                 foreach ($lesFraisForfait as $unFrais) {
                     $idFrais = $unFrais['idfrais'];
                     $libelle = htmlspecialchars($unFrais['libelle']);
                     $quantite = $unFrais['quantite']; ?>

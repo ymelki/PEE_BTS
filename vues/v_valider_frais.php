@@ -15,7 +15,11 @@
     </div>
 
 </div>   
-
+<?php
+if (isset($erreur)){
+    echo $erreur;
+}
+?>
 <form role="form" method="POST" 
  action="index.php?uc=ValiderFrais&action=detail_fiche">
 
@@ -29,8 +33,15 @@
 }
  ?>
 </select>
+<br />
+<select name="mois"  >
+            <?php foreach ($moisVisiteur as $mois => $unMoisVisiteur) { ?>
+                <option value="<?php echo $mois ?>"> <?php echo $unMoisVisiteur['mois'] . '/' . $unMoisVisiteur['annee'] ?></option>
+            <?php
+            }
+            ?>
 
-
+</select>
   
 
     <input id="ok" type="submit" value="Valider" class="btn btn-success" 
