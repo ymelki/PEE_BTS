@@ -22,10 +22,7 @@ switch ($action) {
        // creer une session user et mois qui va stocker les données en session
        $_SESSION['user']=$levisiteur;
        $_SESSION['mois']=$mois;
-
-       
-            
-
+ 
        // la fonction estPremierFraisMois renvoie faux lo
         if (!$pdo->estPremierFraisMois($levisiteur, $mois)) {
             $lesFraisForfait = $pdo->getLesFraisForfait($levisiteur, "$mois");
@@ -112,8 +109,8 @@ switch ($action) {
                 if (   $interval > 0  ) {
         
                 
-                 $dates = new DateTime($annee_max."-".$mois_max."-".$jour_max);
-                 $dates->modify('+1 month');
+                  $dates = new DateTime($annee_max."-".$mois_max."-".$jour_max);
+                  $dates->modify('+1 month');
                 
                   $date_format= $dates->format('Ym');
                 
@@ -124,17 +121,8 @@ switch ($action) {
                  $pdo->creeNouvellesLignesFrais($_SESSION['user'], $date_format);
 
                 // 1 Modification de la date
-                  $pdo->setMoisencoursFraisHF($date_format,10);
-                }
-
-
-
-
-
-         
-        
-
-
+                  $pdo->setMoisencoursFraisHF($date_format,$id);
+                }  
 
            }
         }

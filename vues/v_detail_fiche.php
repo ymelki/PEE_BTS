@@ -74,7 +74,21 @@
      <?php 
 
      ?>
-<a href="/index.php?uc=paiementFicheFrais&action=modifier_statut&idFrais=<? echo $_GET['idFrais']  ?>">
+
+<?php
+var_dump($etatencours);
+if ($etatencours=="MP") {
+
+    ?>
+        <a href="/index.php?uc=paiementFicheFrais&action=modifier_statut_rembourse&mois=<?=$_GET['mois']?>&idFrais=<?=$_GET['idFrais']  ?>">
+    <button type="button" class="btn btn-success">Signaler que le paiement a été effectué  </button>
+    </a>
+    <?php
+    }
+else {
+    ?>
+<a href="/index.php?uc=paiementFicheFrais&action=modifier_statut&mois=<?=$_GET['mois']?>&idFrais=<?=$_GET['idFrais']  ?>">
 <button type="button" class="btn btn-success">Mettre au statut paiement</button>
 </a>
+<?php } ?>
 </div>

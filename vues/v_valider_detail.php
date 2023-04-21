@@ -86,7 +86,8 @@ Pour le mois : <?=$_SESSION['mois'] ?>
             ?>
         </table>
         <input id="ok" type="submit" value="Supprimer" class="btn btn-success" role="button">
-        <input id="ok" type="submit" formaction="index.php?uc=ValiderFrais&action=reporter" value="reporter" class="btn btn-success" role="button">
+        <input id="ok" type="submit" 
+        formaction="index.php?uc=ValiderFrais&action=reporter" value="reporter" class="btn btn-success" role="button">
      </form>
 
 </div>

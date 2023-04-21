@@ -194,6 +194,22 @@ class PdoGsb
         return $laLigne['nb'];
     }
 
+    public function getEtat($mois, $visiteur) {
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+           "SELECT * FROM fichefrais
+           where mois = :unmois
+           and idvisiteur= :unvisiteur
+            "
+        );
+        $requetePrepare->bindParam(':unvisiteur', $visiteur, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unmois', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetch();
+        return $laLigne['idetat'];
+  
+
+    }
+
     /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais
      * au forfait concernées par les deux arguments
